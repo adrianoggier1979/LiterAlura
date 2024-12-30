@@ -10,6 +10,7 @@ import Models.Record.DatosLibro;
 import com.LiterAlura.demo.Repository.IAutorRepository;
 import com.LiterAlura.demo.Repository.ILibroRepository;
 import com.LiterAlura.demo.Exceptions.LibroNoEncontradoException;
+import org.aspectj.weaver.ast.Var;
 import org.springframework.transaction.annotation.Transactional;
 
 import org.springframework.dao.InvalidDataAccessApiUsageException;
@@ -44,6 +45,7 @@ public class Libreria {
                     3 - Buscar libro por Nombre
                     4 - Buscar libro por idioma
                     5 - Buscar libro por autor
+                    6 - Buscar autores vivos por anio
                     
                     
                      0 - Salir
@@ -79,6 +81,9 @@ public class Libreria {
                     break;
                 case 5:
                     buscarLibroPorAutor();
+                    break;
+                case 6:
+                    buscarAutoresVivosPorAnio();
                     break;
 
                 case 0:
@@ -207,6 +212,22 @@ private void buscarLibroEnLaWeb() {
             }
         } catch (IllegalArgumentException e) {
             System.out.println("El autor ingresado no está registrado");
+        }
+    }
+
+    private void  buscarAutoresVivosPorAnio(){
+        System.out.println("Ingrese el ano del autor que desea buscar ");
+        Integer anioAutor = teclado.nextInt();
+        teclado.nextLine();
+
+        List<Autor> autorVivo = autorRepositoryRepository.findByCumpleaniosLessThanOrFechaFallecimientoGreaterThanEqual(anioAutor, anioAutor);
+
+
+        if (autorVivo.isEmpty()) {
+            System.out.println("No se encontraron autores vivos en el anio " + anioAutor);
+
+        } else {
+            System.out.println("Los autores vivos en el anio " + anioAutor + "son" + autorVivo );
         }
     }
 }
