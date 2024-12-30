@@ -1,4 +1,4 @@
-package Repository;
+package com.LiterAlura.demo.Repository;
 
 import Models.Autor;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,5 +13,5 @@ public interface IAutorRepository extends JpaRepository <Autor,Long> {
 
     List<Autor> findByCumpleaniosLessThanOrFechaFallecimientoGreaterThanEqual(int anioBuscado, int anioBuscado1);
 
-    Optional<Autor> findFirstByNombreContainsIgnoreCase(String escritor);
+    Optional<Autor> findByNombre(String escritor);
 }

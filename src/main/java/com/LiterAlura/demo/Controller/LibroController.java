@@ -1,10 +1,7 @@
 package com.LiterAlura.demo.Controller;
 
-
-
-
 import Models.Libro;
-import Repository.ILibroRepository;
+import com.LiterAlura.demo.Repository.ILibroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,7 +38,7 @@ import java.util.List;
         public Libro actualizarLibro(@PathVariable Long id, @RequestBody Libro libroActualizado) {
             return libroRepository.findById(id).map(libro -> {
                 libro.setTitulo(libroActualizado.getTitulo());
-                libro.setAutor(libroActualizado.getAutor());
+                libro.setAutores(libroActualizado.getAutores());
                 // Actualiza más campos según corresponda
                 return libroRepository.save(libro);
             }).orElseThrow(() -> new RuntimeException("Libro no encontrado con ID: " + id));

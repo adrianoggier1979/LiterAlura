@@ -7,8 +7,8 @@ import Models.Idioma;
 import Models.Libro;
 import Models.LibrosRespuestaApi;
 import Models.Record.DatosLibro;
-import Repository.IAutorRepository;
-import Repository.ILibroRepository;
+import com.LiterAlura.demo.Repository.IAutorRepository;
+import com.LiterAlura.demo.Repository.ILibroRepository;
 import com.LiterAlura.demo.Exceptions.LibroNoEncontradoException;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -139,29 +139,10 @@ private void buscarLibroEnLaWeb() {
     } catch (InvalidDataAccessApiUsageException e) {
         System.out.println("No se puede persisitir el libro buscado!");
     }
-//    Libro libro = getDatosLibro();
-//
-//    if (libro == null) {
-//        System.out.println("Libro no encontrado.");
-//        return;
-//    }
-//
-//    //datosLibro.add(libro);
-//    try {
-//        boolean libroExists = libroRepository.existsByTitulo(libro.getTitulo());
-//        if (libroExists) {
-//            System.out.println("El libro ya existe en la base de datos!");
-//        } else {
-//            libroRepository.save(libro);
-//            System.out.println(libro.toString());
-//        }
-//    } catch (InvalidDataAccessApiUsageException e) {
-//        System.out.println("No se puede persisitir el libro buscado!");
-//    }
 }
 
     @Transactional(readOnly = true)
-    private void librosBuscados(){
+    protected void librosBuscados(){
 
         List<Libro> libros = libroRepository.findAll();
         if (libros.isEmpty()) {
@@ -198,7 +179,7 @@ private void buscarLibroEnLaWeb() {
             }else {
                 System.out.println("Libros encontrados en el idioma " + idiomaStr + ":");
                 for (Libro libro : libros){
-                    System.out.println(libros.toString());
+                    System.out.println(libro.toString());
                 }
 
             }

@@ -1,8 +1,6 @@
 package Models;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
 import jakarta.persistence.*;
-
 import java.util.List;
 
 @Entity
@@ -13,21 +11,14 @@ public class Autor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
-
     private String nombre;
-
-
     private Integer cumpleanios;
-
-
     private Integer fechaFallecimiento;
 
-    @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-
-
-
+    @ManyToMany(mappedBy = "autores")
     private List<Libro> libros;
+
+    public Autor() {}
 
     public Autor(Long id, String nombre, Integer cumpleanios, Integer fechaFallecimiento) {
         this.id = id;
@@ -35,11 +26,6 @@ public class Autor {
         this.cumpleanios = cumpleanios;
         this.fechaFallecimiento = fechaFallecimiento;
     }
-
-    public Autor(){
-
-    }
-
 
     public Long getId() {
         return id;
@@ -73,5 +59,13 @@ public class Autor {
         this.fechaFallecimiento = fechaFallecimiento;
     }
 
-
+    @Override
+    public String toString() {
+        return "Autor{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", cumpleanios='" + cumpleanios + '\'' +
+                ", fechaFallecimiento='" + fechaFallecimiento + '\'' +
+                '}';
+    }
 }
